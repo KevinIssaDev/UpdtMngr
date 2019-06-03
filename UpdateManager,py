@@ -4,7 +4,7 @@ import requests
 from termcolor import colored
 
 def clear():
-    os.system("cls") # cls on UNIX
+    os.system("clear") # cls on Windows, clear on UNIX
 
 
 def colored_print(content, color):
