@@ -98,6 +98,7 @@ def update_entry(data, entries):
             if entry == _entry[0]:
                 data[_entry[1]]['version'] = fetch_version(_entry[1], data[_entry[1]]['store'])
                 valid = True
+                break
 
 
 def remove_entry(data, entries):
@@ -108,6 +109,7 @@ def remove_entry(data, entries):
             if entry == _entry[0]:
                 del data[_entry[1]]
                 valid = True
+                break
 
 
 def fetch_version(bundle_id, store):
