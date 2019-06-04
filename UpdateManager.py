@@ -169,5 +169,6 @@ countries = [['Albania', 'AL'], ['Australia', 'AU'], ['Austria', 'AT'], ['Belgiu
             ['Sweden', 'SE'], ['Switzerland', 'CH'], ['Taiwan', 'TW'], ['Turkey', 'TR'], ['United Kingdom', 'GB'], ['United States', 'US'], ['Vietnam', 'VN']]
 
 if __name__ == '__main__':
+    clear_command = "cls" if os.name == "nt" else "clear"
     data_path = 'data.json'
     start(data_path)
