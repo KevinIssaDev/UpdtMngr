@@ -4,6 +4,7 @@ import requests
 from termcolor import colored
 
 def clear():
+    """ Clear the console """
     os.system("clear")
 
 
@@ -39,6 +40,7 @@ def get_option_input(options, text):
 
 
 def handle_option(data, entries, option):
+    """ Run appropriate function for option retrieved """
     if option == "a":
         add_entry(data)
     elif option == "u":
@@ -48,6 +50,7 @@ def handle_option(data, entries, option):
 
 
 def help(options):
+    """ Print the list of options """
     print(colored_print("-"*47 + "\n" + " H E L P\n" + "-"*47, "yellow"))
     for option in options:
         print(colored_print(f"[{option[1]}] {option[0]}", "white"))
@@ -55,6 +58,7 @@ def help(options):
 
 
 def validate_bundle_id(info):
+    """ If bunlde ID lookup had results """
     if info['resultCount'] == 1:
         return True
     else:
@@ -62,12 +66,14 @@ def validate_bundle_id(info):
 
 
 def validate_file(data_path):
+    """ If file exist and is not empty """
     if os.path.isfile(data_path) and os.path.getsize(data_path) > 0:
         return True
     return False
 
 
 def load_entries(data_path):
+    """ Load data from json file """
     if validate_file(data_path):
         with open(data_path, 'r') as data_file:
             data = json.load(data_file)
@@ -79,6 +85,7 @@ def load_entries(data_path):
 
 
 def add_entry(data):
+    """ Add an entry """
     bundle_id = input(colored_print("Bundle ID: ", "white"))
     store = get_option_input(countries, "Country (help: 'help'): ")
     info_url = "http://itunes.apple.com/" + store + "/lookup?bundleId=" + bundle_id
@@ -93,6 +100,7 @@ def add_entry(data):
 
 
 def update_entry(data, entries):
+    """ Update the local version of an entry """
     valid = False
     while not valid:
         entry = get_int_input(colored_print("Entry to update (number next to app): ", "white"))
@@ -104,6 +112,7 @@ def update_entry(data, entries):
 
 
 def remove_entry(data, entries):
+    """ Remove an entry """
     valid = False
     while not valid:
         entry = get_int_input(colored_print("Entry to remove (number next to app): ", "white"))
@@ -115,17 +124,20 @@ def remove_entry(data, entries):
 
 
 def fetch_version(bundle_id, store):
+    """ Fetch the latest version of bundle ID from appropriate store """
     info_url = "http://itunes.apple.com/" + store + "/lookup?bundleId=" + bundle_id
     info = requests.get(info_url).json()
     return info['results'][0]['version']
 
 
 def dump_data(data, data_path):
+    """ Write the data to json file  """
     with open(data_path, 'w') as data_file:
         json.dump(data, data_file, indent = 4, sort_keys = True)
 
 
 def start(data_path):
+    """ Main """
     options = [["Add", "A"], ["Update", "U"], ["Remove", "R"]]
     entries = []
     data = load_entries(data_path)
