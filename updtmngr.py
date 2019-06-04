@@ -5,7 +5,7 @@ from termcolor import colored
 
 def clear():
     """ Clear the console """
-    os.system("clear")
+    os.system(clear_command)
 
 
 def colored_print(content, color):
@@ -183,4 +183,9 @@ countries = [['Albania', 'AL'], ['Australia', 'AU'], ['Austria', 'AT'], ['Belgiu
 if __name__ == '__main__':
     clear_command = "cls" if os.name == "nt" else "clear"
     data_path = 'data.json'
-    start(data_path)
+    try:
+        start(data_path)
+    except KeyboardInterrupt:
+        print(colored_print("\nExiting...", "red"))
+    except EOFError:
+        print(colored_print("\nExiting...", "red"))
