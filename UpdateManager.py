@@ -4,7 +4,7 @@ import requests
 from termcolor import colored
 
 def clear():
-    os.system("clear") # cls on Windows, clear on UNIX
+    os.system("clear")
 
 
 def colored_print(content, color):
@@ -13,6 +13,7 @@ def colored_print(content, color):
 
 
 def get_int_input(text):
+    """ Retrieve an integer """
     valid = False
     while not valid:
         _input = input(text)
@@ -25,6 +26,7 @@ def get_int_input(text):
 
 
 def get_option_input(options, text):
+    """ Retrieve an option from a list of options """
     valid = False
     while not valid:
         _input = input(colored_print(text, "yellow"))
@@ -46,10 +48,10 @@ def handle_option(data, entries, option):
 
 
 def help(options):
-    print(colored_print("—"*47 + "\n" + " H E L P\n" + "—"*47, "yellow"))
+    print(colored_print("-"*47 + "\n" + " H E L P\n" + "-"*47, "yellow"))
     for option in options:
         print(colored_print(f"[{option[1]}] {option[0]}", "white"))
-    print(colored_print("—"*47, "yellow"))
+    print(colored_print("-"*47, "yellow"))
 
 
 def validate_bundle_id(info):
@@ -137,7 +139,7 @@ def start(data_path):
  \___/| .__/ \__,_|\__\_|  |_/_| |_|\__, |_|
       | |                            __/ |
       |_| by @KevinIssaDev          |___/      """, "white") + "\n")
-        print(colored_print("—"*47 + "\n" + " W A T C H   L I S T\n" + "—"*47, "yellow"))
+        print(colored_print("-"*47 + "\n" + " W A T C H   L I S T\n" + "-"*47, "yellow"))
         if data:
             for index, app in enumerate(data):
                 entries.append([index, app])
@@ -150,10 +152,10 @@ def start(data_path):
                     print(colored_print(f"[{index}] ", "white") + colored_print(data[app]['name'], "red") + " | " + colored_print(data[app]['version'], "white"))
         else:
             print(colored_print("No entries", "red"))
-        print(colored_print("—"*47 + "\n" + " O P T I O N S\n" + "—"*47, "yellow"))
+        print(colored_print("-"*47 + "\n" + " O P T I O N S\n" + "-"*47, "yellow"))
         for option in options:
             print(colored_print(f"[{option[1]}] {option[0]}", "white"))
-        print(colored_print("—"*47, "yellow"))
+        print(colored_print("-"*47, "yellow"))
         option = get_option_input(options, "Option: ")
         handle_option(data, entries, option)
         dump_data(data, data_path)
