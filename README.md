@@ -13,4 +13,4 @@ Lets you know when an application you're monitoring has received an update
 
 ## Preview
 
-![](https://i.imgur.com/xdqaGfK.png)
+![](https://imgur.com/RiCjaLN)
